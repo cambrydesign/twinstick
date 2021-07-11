@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     private float wanderTimer = 0;
     private GameObject gun;
 
+    public bool willWander = true;
     public float waitTime = 10;
     public float wanderRadius = 5;
     public float maxWanderRadius = 20;
@@ -80,7 +81,7 @@ public class Enemy : MonoBehaviour
             CheckIfReachedDestination();
         }
 
-        if (wanderTimer >= waitTime) {
+        if (wanderTimer >= waitTime && willWander) {
             engine.ChangeState(new EnemyWanderState(this));
             engine.Update();
             wanderTimer = 0;
@@ -88,7 +89,7 @@ public class Enemy : MonoBehaviour
     }
 
     void FixedUpdate() {
-        if (engine.currentState.stateName == "wait") {
+        if (engine.currentState.stateName == "wait" && willWander) {
             wanderTimer++;
         }
 
@@ -109,7 +110,12 @@ public class Enemy : MonoBehaviour
 
             if (seenTimer <= 0) {
                 isAlert = false;
-                engine.ChangeState(new EnemyWanderState(this));
+                if (willWander) {
+                    engine.ChangeState(new EnemyWanderState(this));
+                } else {
+                    agent.SetDestination(spawnPoint);
+                    engine.ChangeState(new EnemyWaitState(this));
+                }
                 engine.Update();
                 return;
             }
