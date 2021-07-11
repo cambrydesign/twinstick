@@ -21,14 +21,15 @@ public class EnemyAlertState : IState
 
     public void Execute() 
     {
-        Debug.Log("executing alert");
-        owner.alertUpdateTimer = owner.alertUpdateTime;
-        NavMeshHit navHit;
-        NavMesh.SamplePosition(owner.player.transform.position, out navHit, 100, -1);
-        owner.agent.SetDestination(navHit.position);
-        Debug.Log(owner.agent.destination);
-        Debug.Log(owner.agent.speed);
-        return;
+        if (Vector3.Distance(owner.gameObject.transform.position, owner.player.transform.position) <= owner.attackRange) {
+            return;
+        } else {
+            owner.alertUpdateTimer = owner.alertUpdateTime;
+            NavMeshHit navHit;
+            NavMesh.SamplePosition(owner.player.transform.position, out navHit, 100, -1);
+            owner.agent.SetDestination(navHit.position);
+            return;
+        }
     }
 
     public void Exit() {
