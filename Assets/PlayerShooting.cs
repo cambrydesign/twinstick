@@ -46,7 +46,7 @@ public class PlayerShooting : MonoBehaviour
     {
         if (shootTimer <= 0) {
             shootTimer = shootDelay;
-            GameObject bullet = ObjectPoolingManager.Instance.GetBullet();
+            GameObject bullet = BulletPoolingManager.Instance.GetBullet();
             bullet.transform.position = firePoint.position;
             bullet.transform.forward = firePoint.forward;
             Rigidbody rb = bullet.GetComponent<Rigidbody>();

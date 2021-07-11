@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody rb;
+    private GameObject firePoint;
 
     public float walkSpeed = 35f;
     public float sprintSpeed = 50f;
@@ -20,6 +21,11 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        foreach (Transform child in transform) {
+            if (child.gameObject.tag == "FirePoint") {
+                firePoint = child.gameObject;
+            }
+        }
         currentSpeed = walkSpeed;
         currentEnergy = maxEnergy;
         isSprinting = false;
@@ -78,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hitinfo;
         if (Physics.Raycast (ray, out hitinfo, 1000)) {
             transform.LookAt(hitinfo.point);
+            firePoint.transform.LookAt(hitinfo.point);
         }
     }
 }

@@ -13,7 +13,7 @@ public class EnemySight : MonoBehaviour
         owner = transform.parent.gameObject.GetComponent<Enemy>();
     }
 
-    void OnTriggerEnter(Collider col) {
+    void OnTriggerStay(Collider col) {
         Debug.Log("Triggered");
         if (col.gameObject.tag == "Player") {
             owner.Alert();

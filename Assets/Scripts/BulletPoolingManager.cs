@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPoolingManager : MonoBehaviour
+public class BulletPoolingManager : MonoBehaviour
 {
 
-    private static ObjectPoolingManager instance;
-    public static ObjectPoolingManager Instance { get { return instance; }}
+    private static BulletPoolingManager instance;
+    public static BulletPoolingManager Instance { get { return instance; }}
 
     public GameObject bulletPrefab;
     public int bulletAmount;

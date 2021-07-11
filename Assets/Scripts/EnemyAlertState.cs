@@ -21,10 +21,18 @@ public class EnemyAlertState : IState
 
     public void Execute() 
     {
+        Debug.Log("executing alert");
+        owner.alertUpdateTimer = owner.alertUpdateTime;
+        NavMeshHit navHit;
+        NavMesh.SamplePosition(owner.player.transform.position, out navHit, 100, -1);
+        owner.agent.SetDestination(navHit.position);
+        Debug.Log(owner.agent.destination);
+        Debug.Log(owner.agent.speed);
         return;
     }
 
     public void Exit() {
+        owner.UnequipWeapon();
         return;
     }
 }
