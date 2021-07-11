@@ -21,4 +21,11 @@ public class Bullet : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+
+    void OnCollisionEnter(Collision col) {
+        Debug.Log("Collision");
+        if (col.gameObject.tag == "Enemy") {
+            gameObject.SetActive(false);
+        }
+    }
 }
