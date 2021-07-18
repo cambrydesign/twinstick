@@ -8,6 +8,15 @@ TagManager:
   - Gun
   - FirePoint
   - Bullet
+  - Center
+  - Top
+  - TopLeft
+  - TopRight
+  - Left
+  - Right
+  - Bottom
+  - BottomLeft
+  - BottomRight
   layers:
   - Default
   - TransparentFX
