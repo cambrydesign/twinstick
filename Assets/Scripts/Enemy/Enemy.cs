@@ -124,18 +124,23 @@ public class Enemy : MonoBehaviour
                 engine.ChangeState(new EnemyAttackState(this));
                 engine.Update();
                 shootTimer = shootDelay;
-                engine.ChangeState(new EnemyAlertState(this));
-                engine.Update();
+                Alert();
                 return;
             } else {
                 if (engine.currentState.stateName != "alert") {
-                    engine.ChangeState(new EnemyAlertState(this));
+                    Alert();
                 }
                 if (alertUpdateTimer <= 0) {
                     engine.Update();
                     return;
                 }
             }
+        }
+    }
+
+    void OnCollisionEnter(Collision col) {
+        if (col.gameObject.tag == "Bullet") {
+            Alert();
         }
     }
 

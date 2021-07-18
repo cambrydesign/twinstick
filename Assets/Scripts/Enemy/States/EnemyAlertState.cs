@@ -16,6 +16,12 @@ public class EnemyAlertState : IState
     {
         Debug.Log("alert!");
         owner.EquipWeapon();
+        Collider[] hitColliders = Physics.OverlapSphere(owner.transform.position, owner.attackRange);
+        foreach (var hitCollider in hitColliders) {
+            if (hitCollider.transform.gameObject.tag == "Enemy") {
+                hitCollider.transform.gameObject.GetComponent<Enemy>().Alert();
+            }
+        }
         return;
     }
 
