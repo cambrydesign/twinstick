@@ -37,7 +37,7 @@ public class LevelGenerator : MonoBehaviour
 
     private void AssignPlots() 
     {
-        int centerIndex = Random.Range(1, centers.Length);
+        int centerIndex = Random.Range(0, centers.Length);
 
         int topIndex = GetSideIndex();
         int leftIndex = GetSideIndex();
@@ -95,7 +95,7 @@ public class LevelGenerator : MonoBehaviour
     }
 
     private int GetCornerIndex() {
-        int index = Random.Range(1, corners.Length);
+        int index = Random.Range(0, corners.Length);
         if (usedCorners.Contains(index)) {
             return GetCornerIndex();
         } else {
@@ -105,7 +105,7 @@ public class LevelGenerator : MonoBehaviour
     }
 
     private int GetSideIndex() {
-        int index = Random.Range(1, sides.Length);
+        int index = Random.Range(0, sides.Length);
         if (usedSides.Contains(index)) {
             return GetSideIndex();
         } else {

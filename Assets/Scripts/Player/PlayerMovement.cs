@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody rb;
     private GameObject firePoint;
+    private CinemachineVirtualCamera cam;
 
     public float walkSpeed = 35f;
     public float sprintSpeed = 50f;
@@ -26,6 +28,11 @@ public class PlayerMovement : MonoBehaviour
                 firePoint = child.gameObject;
             }
         }
+
+        cam = GameObject.FindGameObjectWithTag("PlayerVCam").GetComponent<CinemachineVirtualCamera>();
+
+        cam.Follow = transform;
+
         currentSpeed = walkSpeed;
         currentEnergy = maxEnergy;
         isSprinting = false;
