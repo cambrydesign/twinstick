@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class LevelGenerator : MonoBehaviour
         AssignPlots();
 
         BuildPlots();
+
+        BuildMeshes();
     }
 
     private void AssignPlots() 
@@ -72,6 +75,14 @@ public class LevelGenerator : MonoBehaviour
         BuildPlot(topLeft, new Vector3(-29.8f, 0, 29.8f), new Vector3(0, -90, 0), "TopLeft");
         BuildPlot(bottomRight, new Vector3(29.8f, 0, -29.8f), new Vector3(0, 90, 0), "BottomRight");
         BuildPlot(bottomLeft, new Vector3(-29.8f, 0, -29.8f), new Vector3(0, -180, 0), "BottomLeft");
+    }
+
+    private void BuildMeshes() {
+        GameObject[] meshes = GameObject.FindGameObjectsWithTag("Meshable");
+
+        foreach (GameObject mesh in meshes) {
+            mesh.GetComponent<NavMeshSurface>().BuildNavMesh();
+        }
     }
 
     private void BuildPlot(GameObject target, Vector3 position, Vector3 rotation, string name) 
